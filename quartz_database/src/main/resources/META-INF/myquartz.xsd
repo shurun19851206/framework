@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:tool="http://www.springframework.org/schema/tool"
+    xmlns="http://rainy.com/schema/myquartz"
+	targetNamespace="http://rainy.com/schema/myquartz">
+
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+	<xsd:import namespace="http://www.springframework.org/schema/beans" />
+	<xsd:import namespace="http://www.springframework.org/schema/tool" />
+	
+
+	<xsd:complexType name="quartzType">
+		<xsd:attribute name="id" type="xsd:ID" use="required">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ Spring bean Id ]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="serviceBeanName" type="xsd:string"
+			use="required">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ targetBean ]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="methodName" type="xsd:string"
+			use="optional" default="execute">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ targetMethod  default 'execute']]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="infCode" type="xsd:string"
+			use="optional" default="false">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ infCode]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="multiWarehouse" type="defaultable-boolean"
+			use="optional" default="false">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ multiWarehouse]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+		<xsd:attribute name="concurrent" type="defaultable-boolean" use="optional" default="false">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ concurrent  default 'false']]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+		<xsd:attribute name="priority" type="xsd:string" use="optional"
+			default="0">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ priority ]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+		<xsd:attribute name="multiPriority" type="defaultable-boolean" use="optional"
+			default="false">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ multiPriority ]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+		<xsd:attribute name="description" type="xsd:string" use="optional"
+			default="">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ describe]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:element name="quartz" type="quartzType">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ use quartz]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:simpleType name="defaultable-boolean">
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="true"/>
+			<xsd:enumeration value="false"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

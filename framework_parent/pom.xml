@@ -1,0 +1,303 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.rainy</groupId>
+	<artifactId>framework_parent</artifactId>
+	<version>0.0.1</version>
+	<packaging>pom</packaging>
+  
+	<modules>
+		<module>../framework_core</module>
+		<module>../framework_log</module>
+		<module>../framework_shiro</module>
+		<module>../framework_redis</module>
+		<module>../framework_validate</module>
+		<module>../framework_web_resource</module>
+		<module>../framework_entity</module>
+		<module>../framework_db</module>
+		<module>../framework_web_websocket</module>
+		<module>../framework_web_mvc</module>
+		<module>../framework_job</module>
+		<module>../framework_interface</module>
+		<module>../framework_lucence</module>
+		<module>../framework_mail</module>
+		<module>framework_zookeeper</module>
+		<module>framework_tbschedule</module>
+	</modules>
+	
+	<!-- 定义公共变量 -->  
+	<properties>
+		<spring.framework>org.springframework</spring.framework>
+	    <spring.version>4.1.6.RELEASE</spring.version>
+	</properties>
+	
+	<dependencyManagement>
+		<dependencies>
+			<!-- spring framework -->
+		    <dependency>
+		        <groupId>${spring.framework}</groupId>
+		        <artifactId>spring-context</artifactId>
+		        <version>${spring.version}</version>
+		    </dependency>
+		    
+		    <!-- spring web -->
+		    <dependency>
+		           <groupId>${spring.framework}</groupId>
+		           <artifactId>spring-web</artifactId>
+		           <version>${spring.version}</version>
+		       </dependency>
+		       
+		       <!-- spring webmvc -->
+		        <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-webmvc</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			 <!-- spring aop -->
+			 <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-aop</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			 <!-- spring aspects -->
+			 <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-aspects</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			 <!-- spring beans -->
+			 <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-beans</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			 <!-- spring context -->
+			 <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-expression</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			 <!-- spring context support -->
+			 <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-context-support</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			 <!-- spring core -->
+			 <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-core</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			 <!-- spring core -->
+			 <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-instrument</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			 <!-- spring core -->
+			 <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-jdbc</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			 <!-- spring core -->
+			 <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-instrument-tomcat</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			 <!-- spring core -->
+			 <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-jms</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			 <!-- spring core -->
+			 <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-messaging</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			 <!-- spring core -->
+			 <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-orm</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			 <!-- spring core -->
+			 <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-oxm</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			 <!-- spring websocket -->
+			 <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-websocket</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			 <!-- spring tx -->
+			 <dependency>
+				 <groupId>${spring.framework}</groupId>
+				 <artifactId>spring-tx</artifactId>
+				 <version>${spring.version}</version>
+			 </dependency>
+			 
+			<!-- common 包的引用 -->
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-lang3</artifactId>
+			    <version>3.4</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>commons-logging</groupId>
+			    <artifactId>commons-logging-api</artifactId>
+			    <version>1.1</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>commons-dbcp</groupId>
+			    <artifactId>commons-dbcp</artifactId>
+			    <version>1.4</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>commons-logging</groupId>
+			    <artifactId>commons-logging</artifactId>
+			    <version>1.2</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-io</artifactId>
+			    <version>1.3.2</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>commons-dbutils</groupId>
+			    <artifactId>commons-dbutils</artifactId>
+			    <version>1.6</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>commons-pool</groupId>
+			    <artifactId>commons-pool</artifactId>
+			    <version>1.6</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>commons-beanutils</groupId>
+			    <artifactId>commons-beanutils</artifactId>
+			    <version>1.9.2</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>commons-codec</groupId>
+			    <artifactId>commons-codec</artifactId>
+			    <version>1.10</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.7.0</version>
+			</dependency>
+            
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.9</version>
+            </dependency>
+			
+			<dependency>
+			    <groupId>jdom</groupId>
+			    <artifactId>jdom</artifactId>
+			    <version>1.1</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>com.alibaba</groupId>
+			    <artifactId>fastjson</artifactId>
+			    <version>1.2.5</version>
+			</dependency>
+		 </dependencies>
+	 </dependencyManagement>
+	 <build>
+	 <!-- 最好不要使用插件，可能会引起报错 -->
+	 <!-- 
+	 	<plugins>
+	 		<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
+            </plugin>
+	 	
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-remote-resources-plugin</artifactId>
+				<version>1.5</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.4.3</version>
+			</plugin>
+		</plugins>
+		 -->
+	 </build>
+</project>

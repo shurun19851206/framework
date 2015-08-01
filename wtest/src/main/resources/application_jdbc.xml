@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+	    xmlns:aop="http://www.springframework.org/schema/aop"
+	    xmlns:tx="http://www.springframework.org/schema/tx"
+        xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+        
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+		    <list>
+		        <value>classpath:jdbc.properties</value>
+		    </list>
+		</property>
+	</bean>
+        
+	<bean id="dataSource_master" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	    <property name="driverClass"><value>${jdbc.driverClassName}</value></property>
+	    <property name="jdbcUrl"><value>${jdbc.url}</value></property>
+	    <property name="user"><value>${jdbc.user}</value></property>
+	    <property name="password"><value>${jdbc.password}</value></property>
+	    <property name="minPoolSize"><value>1</value></property>
+	    <property name="maxPoolSize"><value>1</value></property>
+	    <property name="maxIdleTime"><value>120</value></property>
+	    <property name="idleConnectionTestPeriod"><value>1</value></property>
+	    <property name="initialPoolSize"><value>1</value></property>
+	    <property name="numHelperThreads"><value>1</value></property>
+	    <property name="acquireRetryAttempts"><value>8</value></property>
+	    <property name="testConnectionOnCheckin" value="false"/>
+	</bean>
+	
+	<bean id="dataSource_sh" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	    <property name="driverClass"><value>${jdbc.driverClassName}</value></property>
+	    <property name="jdbcUrl"><value>${sh.jdbc.url}</value></property>
+	    <property name="user"><value>${sh.jdbc.user}</value></property>
+	    <property name="password"><value>${sh.jdbc.password}</value></property>
+	    <property name="minPoolSize"><value>10</value></property>
+	    <property name="maxPoolSize"><value>300</value></property>
+	    <property name="maxIdleTime"><value>120</value></property>
+	    <property name="idleConnectionTestPeriod"><value>3</value></property>
+	    <property name="initialPoolSize"><value>10</value></property>
+	    <property name="numHelperThreads"><value>3</value></property>
+	    <property name="acquireRetryAttempts"><value>8</value></property>
+	    <property name="testConnectionOnCheckin" value="false"/>
+	</bean>
+	
+	<!-- 统一数据库 -->
+    <bean id="dataSource" class="wtest.DynamicDataSource">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <entry key="dataSource_master" value-ref="dataSource_master" />
+                <entry key="dataSource_sh" value-ref="dataSource_sh" />
+            </map>
+        </property>
+        <property name="defaultTargetDataSource" ref="dataSource_master"/>
+    </bean>
+    
+     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+		 <property name="dataSource" ref="dataSource" />
+	</bean> 
+    
+    <!-- 数据源动态切换 -->
+    <bean id="dataSourceAdvice" class="wtest.DataSourceAdvice" />
+    
+    <!-- 事务切面配置 -->
+    <aop:config>
+        <aop:pointcut id="serviceOperation" expression="execution(* wtest.service..*(..))"/>
+        <aop:advisor pointcut-ref="serviceOperation" advice-ref="txAdvice"/>
+    </aop:config>
+    <!-- 通知配置 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="save*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*" read-only="true" rollback-for="Exception"/>
+        </tx:attributes>
+    </tx:advice>
+    
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    
+    <bean id="testC3P0Service" class="wtest.service.TestC3P0Service">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+    
+</beans>

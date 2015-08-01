@@ -1,0 +1,15 @@
+framework_parent
+	framework_log
+	framework_db
+	framework_core
+	framework_validate
+	framework_entity
+	framework_web_mvc
+	framework_web_resource
+	framework_web_socket
+	framework_shiro
+	framework_redis
+	framework_job
+	framework_interface
+	
+git地址：https://github.com/shurun19851206/framework.git

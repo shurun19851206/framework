@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.rainy.apps</groupId>
+	<artifactId>webdemo</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>webdemo Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.7</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- 依赖具体模块需要这里显示的依赖才能正常打包 -->
+		<dependency>
+			<groupId>com.rainy</groupId>
+			<artifactId>framework_entity</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+	</dependencies>
+	<build>
+	  <finalName>webdemo</finalName>
+	</build>
+</project>
